@@ -1,0 +1,35 @@
+MWXKeychainSuite is a yet another improved keychain wrapper class based on
+Apple's KeychainWrapper class.
+
+It is written as both a singleton and the standard objective-c instance.
+You can use a singleton as:
+
+  MWXKeychainSuite * keychainSuite = [MWXKeychainSuite sharedInstance];
+
+or use the standard objective-c instance as:
+
+  MWXKeychainSuite * keychainSuite;
+  keychainSuite = [[MWXKeychainSuite alloc] initWithIdentifer:@"BundleId"];
+
+
+It is not write the value for key to the keychains's store
+until the synchronize method is called.
+
+How to use.
+1. Add `Security.framework` to your target
+2. Add `MWXKeychainSuite.h` and `MWXKeychainSuite.m` to your project.
+
+
+Here is a simple example:
+
+  MWXKeychainSuite * keychainSuite = [MWXKeychainSuite sharedInstance];
+  [keychainSuite addObject:@"username" forKey:@"account"];
+  [keychainSuite addObject:@"naishoda" forKey:@"password"];
+  [keychainSuite synchronize];
+
+  NSString * username = [keychainSuite stringForKey:@"account"];
+  NSString * password = [keychainSuite stringForKey:@"password"];
+
+
+Read source codes if you want to learn more usage.
+
