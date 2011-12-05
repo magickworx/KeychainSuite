@@ -12,7 +12,7 @@ or use the standard objective-c instance as:
   keychainSuite = [[MWXKeychainSuite alloc] initWithIdentifer:@"BundleId"];
 
 
-It is not write the value for key to the keychains's store
+It does not write the value for key to the keychains's store
 until the synchronize method is called.
 
 How to use.
@@ -23,12 +23,18 @@ How to use.
 Here is a simple example:
 
   MWXKeychainSuite * keychainSuite = [MWXKeychainSuite sharedInstance];
-  [keychainSuite addObject:@"username" forKey:@"account"];
-  [keychainSuite addObject:@"naishoda" forKey:@"password"];
+  [keychainSuite setObject:@"username" forKey:@"account"];
+  [keychainSuite setObject:@"naishoda" forKey:@"password"];
   [keychainSuite synchronize];
 
   NSString * username = [keychainSuite stringForKey:@"account"];
   NSString * password = [keychainSuite stringForKey:@"password"];
+
+
+  // Save the receipt of In-App Purchase transaction
+  [keychainSuite setObject:[transaction transactionReceipt]
+		 forKey:[[transaction payment] productIdentifier]];
+
 
 
 Read source codes if you want to learn more usage.
